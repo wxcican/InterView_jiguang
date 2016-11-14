@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,5 +23,19 @@ public class MainActivity extends AppCompatActivity {
                 | Notification.DEFAULT_VIBRATE
                 | Notification.DEFAULT_LIGHTS;  // 设置为铃声、震动、呼吸灯闪烁都要
         JPushInterface.setPushNotificationBuilder(1, builder);
+
+
+        // 指定定制的 Notification Layout
+        CustomPushNotificationBuilder builder2 = new
+                CustomPushNotificationBuilder(MainActivity.this,
+                R.layout.view_notification,
+                R.id.icon,
+                R.id.title,
+                R.id.text);
+        // 指定最顶层状态栏小图标
+        builder2.statusBarDrawable = R.drawable.jin;
+        // 指定下拉状态栏时显示的通知图标
+        builder2.layoutIconDrawable = R.drawable.tupian;
+        JPushInterface.setPushNotificationBuilder(2, builder2);
     }
 }
